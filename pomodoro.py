@@ -1,6 +1,5 @@
 import time
 from tkinter import *
-# from turtledemo.penrose import start
 import sys
 import os
 
@@ -9,10 +8,8 @@ def resource_path(relative_path):
     Get absolute path to resource, works for dev and for PyInstaller bundled .exe.
     """
     try:
-        # If running as a bundled executable from PyInstaller
         base_path = sys._MEIPASS
     except AttributeError:
-        # If running normally (not bundled)
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
