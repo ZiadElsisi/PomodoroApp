@@ -27,6 +27,16 @@ count =False
 timer = None
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset () :
+    global secondes,timer
+    my_manager.pomo_counter=1
+    check_right.config(text="✔" * int(my_manager.pomo_counter / 2), background=YELLOW, fg=GREEN, font=(FONT_NAME, 12))
+    my_manager.minutes=WORK_MIN
+    secondes= 0
+    my_canvas.itemconfig(time_text,text =f'{my_manager.minutes:02d}:{secondes:02d}')
+    start_button.config(state="normal")
+    if timer :
+        my_screen.after_cancel(timer)
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 class MinutesManager :
@@ -79,17 +89,7 @@ def count_down ():
 
 
 
-    timer=my_screen.after(1,count_down)
-def reset () :
-    global secondes,timer
-    my_manager.pomo_counter=1
-    check_right.config(text="✔" * int(my_manager.pomo_counter / 2), background=YELLOW, fg=GREEN, font=(FONT_NAME, 12))
-    my_manager.minutes=WORK_MIN
-    secondes= 0
-    my_canvas.itemconfig(time_text,text =f'{my_manager.minutes:02d}:{secondes:02d}')
-    start_button.config(state="normal")
-    if timer :
-        my_screen.after_cancel(timer)
+    timer=my_screen.after(1000,count_down)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
