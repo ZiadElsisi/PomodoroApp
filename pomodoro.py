@@ -31,6 +31,8 @@ def reset () :
     global secondes,timer
     my_manager.pomo_counter=1
     check_right.config(text="✔" * int(my_manager.pomo_counter / 2), background=YELLOW, fg=GREEN, font=(FONT_NAME, 12))
+    Time_label.config(text=f'timer', fg=GREEN)
+
     my_manager.minutes=WORK_MIN
     secondes= 0
     my_canvas.itemconfig(time_text,text =f'{my_manager.minutes:02d}:{secondes:02d}')
@@ -49,12 +51,16 @@ class MinutesManager :
         if self.pomo_counter%8==0 :
             self.minutes=LONG_BREAK_MIN
             self.current_period="Break"
+            Time_label.config(text=f'{self.current_period}',fg=RED)
         elif self.pomo_counter%2==0 :
             self.minutes=SHORT_BREAK_MIN
             self.current_period="Break"
+            Time_label.config(text=f'{self.current_period}',fg=PINK)
+
         else:
             self.minutes=WORK_MIN
             self.current_period="Work"
+            Time_label.config(text=f'{self.current_period}',fg=GREEN)
 
 
 
@@ -68,6 +74,8 @@ def star_counter () :
 
 def count_down ():
     global secondes,timer
+    if my_manager.pomo_counter==1 :
+        Time_label.config(text=f'{my_manager.current_period}', fg=GREEN)
 
     if my_manager.minutes == 0 and secondes==0 :
         my_manager.next_periodd()
@@ -139,3 +147,5 @@ check_right.grid(column=1,row=3)
 
 
 my_screen.mainloop()
+
+
